@@ -1,0 +1,9 @@
+{
+  "lock": false,
+  "tasks": {
+    "dev": "deno run -A --unstable --watch=src redirect.ts"
+  },
+  "imports": {
+    "@express": "https://esm.sh/express@4.18.2"
+  }
+}
