@@ -1,4 +1,4 @@
-import express from "@express";
+import "@loadEnvFile";
 
 const redirectUrl = Deno.env.get("redirectUrl");
 if (!redirectUrl) {
@@ -7,13 +7,14 @@ if (!redirectUrl) {
 
 new URL(redirectUrl); // done to crash if string is not a valid url
 
-const app = express();
-const port = 80;
-
-app.use((req, res) => {
-  res.redirect(301, `${redirectUrl}${req.originalUrl}`);
-});
-
-app.listen(port, () => {
-  console.log(`Redirecting all requests to ${redirectUrl}`);
+Deno.serve((req) => {
+  console.log(`Redirecting ${req.url} to ${redirectUrl}`);
+  const url = new URL(req.url);
+  const location = `${redirectUrl}${url.pathname}${url.search}`;
+  return new Response(null, {
+    status: 301,
+    headers: new Headers({
+      "Location": location,
+    }),
+  });
 });

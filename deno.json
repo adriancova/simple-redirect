@@ -1,9 +1,9 @@
 {
   "lock": false,
   "tasks": {
-    "dev": "deno run -A --unstable --watch=src redirect.ts"
+    "dev": "deno run --allow-read --allow-env --allow-net redirect.ts"
   },
   "imports": {
-    "@express": "https://esm.sh/express@4.18.2"
+    "@loadEnvFile": "https://deno.land/x/dotenv@v3.2.2/load.ts"
   }
 }
